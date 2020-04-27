@@ -30,17 +30,17 @@ def create_melspec(filename, title, folder):
 
 def main():
     orig_path = pathlib.Path().absolute()
-    data_path = pathlib.Path().absolute()/'genres'
-
+    data_path = orig_path/'genres'
+    os.mkdir('training_data')
+    train_path = orig_path/'training_data'
+    
     for path in tqdm(data_path.ls()):
-        try:
-            folder = str(path).split('/')[-1]
-            os.mkdir(folder)
-            for filename in tqdm(os.listdir(path)):
-                full_name = path/filename
-                create_melspec(full_name, filename, folder)
-        except:
-            pass
+        genre_folder = str(path).split('/')[-1]
+        folder = train_path/genre_folder
+        os.mkdir(folder)
+        for filename in tqdm(os.listdir(path)):
+            full_name = path/filename
+            create_melspec(full_name, filename, folder)
 
 if __name__ == '__main__':
     main()
