@@ -28,19 +28,29 @@ def create_melspec(filename, title, folder):
     librosa.display.specshow(S_DB, sr=sr, hop_length=hop_length)
     plt.savefig(f'{folder}/{title[:-4]}.png', bbox_inches='tight', pad_inches=0)
 
+def create_train_val(data_path, train_folder, val_folder, train_count):
+    for path in tqdm(data_path.ls()):
+        genre_folder = str(path).split('/')[-1]
+        os.mkdir(train_folder/genre_folder)
+        os.mkdir(val_folder/genre_folder)
+        train_counter = 0
+        for filename in tqdm(os.listdir(path)):
+            train_counter += 1
+            full_name = path/filename
+            if train_counter <= train_count:
+                create_melspec(full_name, filename, train_folder/genre_folder)
+            else:
+                create_melspec(full_name, filename, val_folder/genre_folder)
+    
 def main():
     orig_path = pathlib.Path().absolute()
     data_path = orig_path/'genres'
-    os.mkdir('training_data')
-    train_path = orig_path/'training_data'
-    
-    for path in tqdm(data_path.ls()):
-        genre_folder = str(path).split('/')[-1]
-        folder = train_path/genre_folder
-        os.mkdir(folder)
-        for filename in tqdm(os.listdir(path)):
-            full_name = path/filename
-            create_melspec(full_name, filename, folder)
+    os.mkdir('train')
+    os.mkdir('valid')
+    train_path = orig_path/'train'
+    val_path = orig_path/'valid'
+    create_train_val(data_path, train_path, val_path, 20)
+
 
 if __name__ == '__main__':
     main()
