@@ -2,7 +2,7 @@
 This project used transfer learning to train a CNN to classify music genres using melspectrogram images of audio files. The model was trained in Google Colab for GPU access. 
 
 ## Data
-The data came from the [GITZAN dataset](http://opihi.cs.uvic.ca/sound/genres.tar.gz) used in the paper “ [Musical genre classification of audio signals](https://ieeexplore.ieee.org/document/1021072) “ by G. Tzanetakis and P. Cook in IEEE Transactions on Audio and Speech Processing 2002.
+The data came from the [GITZAN dataset](http://opihi.cs.uvic.ca/sound/genres.tar.gz) used in the paper "[Musical genre classification of audio signals](https://pdfs.semanticscholar.org/4ccb/0d37c69200dc63d1f757eafb36ef4853c178.pdf)" by G. Tzanetakis and P. Cook in IEEE Transactions on Audio and Speech Processing 2002.
 
 The dataset contains 1000 total 30 second audio clips split equally among 10 genres: blues, classical, country, disco, hiphop, jazz, reggae, rock, metal and pop. 
 
